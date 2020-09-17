@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	 crossorigin="anonymous">
+	 </script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <meta charset="UTF-8">
+    <title>New Note</title>
+</head>
+<body>
+
+{% if autofill_subtopic == True %}
+<input id="autofill" style="display:none;" value="{{ autofill }}">
+{% endif %}
+
+<script>
+window.onload = function () {
+document.getElementById("subtopic").value = document.getElementById("autofill").value;
+};
+
+$(document).ready(() => {
+    $('.js-example-basic-single').select2();
+
+    var i = 1;
+
+    $("legend").html(i+' note');
+
+	$("#add_more").click(() => {
+	   i++;
+	   $("legend").html(i+' notes');
+	   $(".subtopic_set").clone().appendTo("form").prop('class', 'subtopic_set' + i);
+	   $(".subtopic_set"+i).children("input").prop('id', 'subtopic'+i );
+	   $(".subtopic_set"+i).children("input").prop('name', 'subtopic'+i );
+	   $(".subtopic_set"+i).children("input").prop('value', '' );
+	   $(".subtopic_set"+i).children("input").focus();
+
+
+	   $(".subtopic_set"+i).children("textarea").prop('id', 'content'+i );
+	   $(".subtopic_set"+i).children("textarea").prop('name', 'content'+i );
+	   $(".subtopic_set"+i).children("textarea").prop('value', '' );
+
+
+	});
+
+	$("#form_submit").click(() => {
+	    $("form").submit();
+	});
+
+    $(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        if(e.shiftKey){
+        $("#form_submit").click();
+        }
+        else{
+        $("#add_more").click();
+        }
+    }
+
+    });
+
+});
+
+</script>
+
+<header style="position:fixed; ">
+    <h1>Add Notes</h1>
+    <a href="{{ url_for('index') }}"><img name="back" src="{{ url_for('static', filename='back_button.png') }}", style="width=10%; padding: 5px 5px; height=10%; float:left; display: inline;"></logo></a>
+
+    <button id="add_more" style="float:right; display: inline;">Add another idea</button>
+
+
+    <button id="form_submit" style="float:left; display:inline;">Done</button>
+</header>
+<br><br><hr><br>
+
+<br>
+<hr>
+<fieldset>
+    <details>
+    <summary>Controls</summary>
+    Press 'enter' to quickly create a new note, press 'enter' and 'shift' simultaneously to submit. Pressing 'tab' will move you to the next input.
+</details>
+
+    <hr><br>
+        <legend></legend>
+     <form name="add_note" method="post">
+            <select class="js-example-basic-single" name="class" style="width: 50%">
+              <option value="geometry">Geometry</option>
+                ...
+              <option value="biology">Biology</option>
+            </select>
+             <hr>
+                <br>
+         <input autofocus id="topic" name="topic" placeholder="Topic">
+            <br><br>
+             <div class="subtopic_set">
+                    <input type="text" id="subtopic1" name="subtopic1" placeholder="Enter Subtopic here" autocomplete="off" style="width:75%;">
+                 <textarea  type="text" id="content1" name="content1" size="10" placeholder="Notes go here" autocomplete="off" style="width:75% ! important;  resize:both ! important; overflow:auto ! important; height:auto ! important; min-height: 200px ! important;"></textarea>
+                    <br><hr><br>
+             </div>
+
+
+    </form>
+</fieldset>
+
+
+</body>
+</html>
+

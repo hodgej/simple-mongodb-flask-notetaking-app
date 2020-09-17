@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <meta charset="UTF-8">
+    <title>Jacks Notes</title>
+</head>
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+    $("input").css({ display:'inline', float:'right' })
+    $("a").css({ display:'inline', float:'left'})
+});
+
+
+</script>
+
+
+
+<header>
+    <a href="{{ url_for('search') }}"><img name="back" src="{{ url_for('static', filename='back_button.png') }}", style="width=10%; height=10%;"></logo></a>
+    <form name="search" method="post">
+        <input type="submit" value="Search">
+        <input type="text" name="query" placeholder="Search Again" autocomplete="off">
+
+    </form>
+
+</header><br><br>
+<hr><br>
+<body>
+<h1>{{ subtopic }}</h1>
+<h2>Search result for {{ query }} in {{ topic }}</h2>
+<hr>
+<fieldset>
+        <legend>Notes</legend>
+    {% for i in ideas %}
+    <h3>{{ i }}</h3>
+    {% for e in ideas[i] %}
+    <li>{{ ideas[i][loop.index-1] }}</li>
+    {% endfor %}
+    <br><br>
+    {% endfor %}
+</fieldset>
+
+</body>
+</html>

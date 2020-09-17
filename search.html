@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <meta charset="UTF-8">
+    <title>Jacks Notes</title>
+</head>
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+    $("#state").select2({ width: '500' })
+});
+</script>
+    <a href="{{ url_for('index') }}"><img name="back" src="{{ url_for('static', filename='back_button.png') }}", style="width=10%; height=10%;"></logo></a>
+<hr><br>
+<header>
+
+        <h1>Class Notes</h1>
+        <h2>Jack Hodge</h2>
+</header>
+
+<body>
+
+
+    <hr><br>
+
+    <fieldset>
+        <legend>Search for notes</legend>
+    <form name="search" method="post">
+        <select class="js-example-basic-single" name="class" style="width: 50%">
+          <option value="geometry">Geometry</option>
+            ...
+          <option value="biology">Biology</option>
+
+
+        </select>
+        <br><br>
+        <input type="text" name="query" placeholder="Search for a topic" autocomplete="off">
+        <br>
+        <input type="submit" value="Search">
+</form>
+</fieldset>
+
+
+</body>
+</html>
