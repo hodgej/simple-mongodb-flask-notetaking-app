@@ -5,13 +5,13 @@ from pymongo import MongoClient
 
 def init_database(): #add functionality for more databases later
     print("didit")
-    client = MongoClient('mongodb+srv://user:27332Jack!@cluster0.yhrtk.mongodb.net/<dbname>?retryWrites=true&w=majority')
+    client = MongoClient('')
     db = client.notes
     collection = db.biology
 
 
 def search_topic(topic, query):
-    client = MongoClient('mongodb+srv://user:27332Jack!@cluster0.yhrtk.mongodb.net/<dbname>?retryWrites=true&w=majority')
+    client = MongoClient('')
     db = client.notes
     collection = db[topic]
     print("query")
