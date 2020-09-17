@@ -26,7 +26,7 @@ def add_notes(classroom, data):
 
     class_collection = classroom
     client = MongoClient(
-        'mongodb+srv://user:27332Jack!@cluster0.yhrtk.mongodb.net/<dbname>?retryWrites=true&w=majority')
+       )
     db = client.notes
     collection = db[class_collection]
     topic = data["topic"] #named subtopic in db
